@@ -1,0 +1,141 @@
+ Console.WriteLine("Bem-vindo ao sistema de usuários!");
+
+            Console.WriteLine("1. Cadastrar usuário");
+            Console.WriteLine("2. Buscar usuário");
+            Console.WriteLine("3. Deletar usuário");
+            Console.WriteLine("4. Alterar usuário");
+            Console.WriteLine("5. Listar usuários");
+            Console.WriteLine("6. Sair");
+
+            Console.Write("Escolha uma opção: ");
+            int option = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine();
+
+            switch (option)
+            {
+                case 1:
+                    CreateUser();
+                    break;
+
+                case 2:
+                    SearchUser();
+                    break;
+
+                case 3:
+                    DeleteUser();
+                    break;
+
+                case 4:
+                    UpdateUser();
+                    break;
+
+                case 5:
+                    ListUsers();
+                    break;
+
+                case 6:
+                    Console.WriteLine("Até logo!");
+                    return;
+
+                default:
+                    Console.WriteLine("Opção inválida. Tente novamente.");
+                    break;
+            }
+
+            Console.WriteLine();
+        }
+    }
+
+    static void CreateUser()
+    {
+        Console.Write("Digite o nome do novo usuário: ");
+        string name = Console.ReadLine();
+
+        users.Add(name);
+        Console.WriteLine("Usuário cadastrado com sucesso!");
+    }
+
+    static void SearchUser()
+    {
+        if (users.Count == 0)
+        {
+            Console.WriteLine("A lista está vazia ainda...");
+        }
+        else
+        {
+            Console.Write("Digite o índice do usuário que deseja buscar: ");
+            int index = Convert.ToInt32(Console.ReadLine());
+
+            if (index < 0 || index >= users.Count)
+            {
+                Console.WriteLine("Essa posição não existe");
+            }
+            else
+            {
+                string user = users[index];
+                Console.WriteLine("Nome do usuário na posição {0}: {1}", index, user);
+            }
+        }
+    }
+
+    static void DeleteUser()
+    {
+        if (users.Count == 0)
+        {
+            Console.WriteLine("A lista está vazia ainda...");
+        }
+        else
+        {
+            Console.Write("Digite o índice do usuário que deseja deletar: ");
+            int index = Convert.ToInt32(Console.ReadLine());
+
+            if (index < 0 || index >= users.Count)
+            {
+                Console.WriteLine("Essa posição não existe");
+            }
+            else
+            {
+                users.RemoveAt(index);
+                Console.WriteLine("Registro deletado com sucesso!");
+            }
+        }
+    }
+
+    static void UpdateUser()
+    {
+        if (users.Count == 0)
+        {
+            Console.WriteLine("A lista está vazia ainda...");
+        }
+        else
+        {
+            Console.Write("Digite o nome do usuário que deseja alterar: ");
+            string name = Console.ReadLine();
+
+            int index = users.IndexOf(name);
+            if (index == -1)
+            {
+                Console.WriteLine("Esse nome não existe na lista");
+            }
+            else
+            {
+                Console.Write("Digite o novo nome para o usuário: ");
+                string newName = Console.ReadLine();
+
+                users[index] = newName;
+                Console.WriteLine("Nome do usuário alterado com sucesso!");
+            }
+        }
+    }
+
+    static void ListUsers()
+    {
+        Console.WriteLine("Lista de usuários:");
+
+        if (users.Count == 0)
+        {
+            Console.WriteLine("Nenhum usuário cadastrado.");
+        }
+        else
+        {
+            foreach (
